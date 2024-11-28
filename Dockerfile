@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-ARG NEXT_PUBLIC_API_URI=PLUNK_API_URI
+ARG NEXT_PUBLIC_API_URI
 
 RUN yarn install --network-timeout 1000000
 RUN yarn build:shared

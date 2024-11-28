@@ -9,7 +9,7 @@ sh replace-variables.sh &&
 nginx &
 
 echo "Starting the API server..."
-node packages/api/app.js &
+node packages/api/app.js --no-network-family-autoselection &
 echo "API server started in the background."
 
 echo "Starting the Dashboard..."
