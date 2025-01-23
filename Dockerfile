@@ -3,8 +3,8 @@ FROM node:20-alpine AS base
 
 WORKDIR /app
 
-# Install libc6-compat for Prisma compatibility
-RUN apk add --no-cache libc6-compat
+# Install required dependencies for Prisma
+RUN apk add --no-cache libc6-compat openssl
 
 COPY . .
 
@@ -24,7 +24,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install dependencies required for Prisma and other tools
-RUN apk add --no-cache bash nginx libc6-compat
+RUN apk add --no-cache bash nginx libc6-compat openssl
 
 # Copy application files from the base stage
 COPY --from=base /app/packages/api/dist /app/packages/api/
