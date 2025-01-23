@@ -15,9 +15,6 @@ RUN yarn build:shared
 RUN yarn workspace @plunk/api build
 RUN yarn workspace @plunk/dashboard build
 
-# Generate Prisma Client for API workspace
-RUN yarn workspace @plunk/api prisma generate
-
 # Final Stage
 FROM node:20-alpine
 
@@ -31,7 +28,6 @@ COPY --from=base /app/packages/api/dist /app/packages/api/
 COPY --from=base /app/packages/dashboard/.next /app/packages/dashboard/.next
 COPY --from=base /app/packages/dashboard/public /app/packages/dashboard/public
 COPY --from=base /app/node_modules /app/node_modules
-COPY --from=base /app/node_modules/.prisma /app/node_modules/.prisma
 COPY --from=base /app/packages/shared /app/packages/shared
 COPY --from=base /app/prisma /app/prisma
 COPY deployment/nginx.conf /etc/nginx/nginx.conf
